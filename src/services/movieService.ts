@@ -8,14 +8,14 @@ interface TMDBResponse {
   results: Movie[];
 }
 
-export default async function fetchMovies(query: string) { 
-    const config = {
-        params: { query },
-        headers: {
-        Authorization: `Bearer ${TOKEN}`,
-        },
-    };
+export default async function fetchMovies(query: string): Promise<Movie[]> {
+  const config = {
+    params: { query },
+    headers: {
+      Authorization: `Bearer ${TOKEN}`,
+    },
+  };
 
-    const response = await axios.get<TMDBResponse>(`${BASE_URL}/search/movie`, config);
-    return response.data.results;
+  const response = await axios.get<TMDBResponse>(`${BASE_URL}/search/movie`, config);
+  return response.data.results;
 }

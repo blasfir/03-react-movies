@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import css from './App.module.css'
-import toast from 'react-hot-toast';
+import toast, { Toaster } from 'react-hot-toast';
 import SearchBar from '../SearchBar/SearchBar'
 import fetchMovies from '../../services/movieService'
 import MovieGrid from '../MovieGrid/MovieGrid'
@@ -8,7 +8,6 @@ import Loader from '../Loader/Loader'
 import ErrorMessage from '../ErrorMessage/ErrorMessage'
 import MovieModal from '../MovieModal/MovieModal'
 import type { Movie } from '../../types/movie';
-//import { useState } from "react";
 
 export default function App() {
 
@@ -23,7 +22,8 @@ export default function App() {
   const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
   
     
-  const handleSearch = async (query: string) => {
+    const handleSearch = async (query: string) => {
+    setisErrorMessage(false);  
     setIsLoading(true);  
     setMovies([]);
     try {  
@@ -60,6 +60,7 @@ export default function App() {
           {isMovieModal && selectedMovie && (
              <MovieModal movie={selectedMovie} onClose={closeModal} />
           )}
+          <Toaster/>
       </div>
   );
 }
